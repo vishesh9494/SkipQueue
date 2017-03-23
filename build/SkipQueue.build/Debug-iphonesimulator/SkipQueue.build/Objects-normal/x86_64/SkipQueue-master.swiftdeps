@@ -1,0 +1,7 @@
+version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
+options: "ca76006f274bb4dd3e321e3250412b2b"
+build_time: [543434015, 217534000]
+inputs:
+  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/ViewController.swift": [543433985, 0]
+  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/AppDelegate.swift": [543431428, 0]
+  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/DatabaseManager.swift": [543433469, 0]
