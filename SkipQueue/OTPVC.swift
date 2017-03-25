@@ -49,9 +49,13 @@ class OTPVC: UIViewController,UITextFieldDelegate{
     }
     
     @IBAction func btn_submit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationVC")
-        self.parent?.dismiss(animated: false, completion: nil)
-        self.present(vc!, animated: true, completion:nil)
+        performSegue(withIdentifier: "otp_to_cities", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier=="otp_to_cities"){
+            let vc = segue.destination as! locationVC
+        }
     }
 
     @IBAction func btn_resend(_ sender: Any) {
@@ -59,6 +63,7 @@ class OTPVC: UIViewController,UITextFieldDelegate{
     }
     
     @IBAction func btn_cancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }

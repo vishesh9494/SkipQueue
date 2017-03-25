@@ -18,11 +18,12 @@ class locationVC : UIViewController, UITextFieldDelegate,UITableViewDelegate,UIT
      var searchingDataArray:NSMutableArray!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var search: UISearchBar!
+    var city:String=""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  self.parent?.dismiss(animated: false, completion: nil)
-       
-    cities=["Surat","Mumbai","Delhi","Bangalore","Hyderabad","Ahmedabad"]
+        navigationController?.viewControllers=[self]
+        getCities()
         tbl.delegate=self
         tbl.dataSource=self
         search.delegate=self
@@ -32,16 +33,28 @@ class locationVC : UIViewController, UITextFieldDelegate,UITableViewDelegate,UIT
         searchingDataArray = []
         self.tbl.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
+    func getCities(){
+        //database code
+        var db=DatabaseManager()
+        var flag=false
+        db.GetRequest(url: "http://onetouch.16mb.com/SkipQ/getcities.php")
+        DispatchQueue.global(qos: .userInteractive).async {
+            flag=db.CreateTask(view: self.view)
+            
+        }
+        while(flag != true){
+            
+        }
+        var array=db.getjson()
+        for var i in 0 ... array.count-1{
+            var arr=array[i] as! [String:String]
+            cities.append(arr["City"]!)
+        }
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.search.endEditing(true)
     }
     override func viewDidAppear(_ animated: Bool) {
-        
-    
-      
-      
-        
-        
         self.tbl.reloadData()
     }
     
@@ -62,7 +75,13 @@ class locationVC : UIViewController, UITextFieldDelegate,UITableViewDelegate,UIT
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //open that location's malls VC
-        
+        if (is_searching==true){
+                city = (searchingDataArray[indexPath.row] as! NSString) as String
+        }
+        else{
+            city = cities[indexPath.row]
+        }
+        performSegue(withIdentifier: "cities_to_malls", sender: self)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
@@ -92,9 +111,11 @@ class locationVC : UIViewController, UITextFieldDelegate,UITableViewDelegate,UIT
             self.tbl.reloadData()
         }
     }
-     @IBAction func btn_cancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier=="cities_to_malls"){
+            let vc = segue.destination as! mallsVC
+            vc.city = self.city
+        }
+    }
     
 }

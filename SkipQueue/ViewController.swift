@@ -25,17 +25,49 @@ class ViewController: UIViewController,UITextFieldDelegate,UIScrollViewDelegate 
     }
 
     @IBAction func login(_ sender: Any) {
+        let db=DatabaseManager()
+        var dict:NSDictionary=["email":email.text,"mobile":mobile.text]
+        var flag = false
+        db.GeneratePostString(dict:dict)
+        db.GetRequest(url: "http://onetouch.16mb.com/SkipQ/login.php")
+        DispatchQueue.global(qos: .userInteractive).async {
+            flag=db.CreateTask(view: self.view)
+            
+        }
+        while(flag != true){
+            
+        }
+        var array=(db.getjson())[0] as! [String:String]
+        if(array["flag"] == "1"){
+            // open the next page
+            performSegue(withIdentifier: "login_to_otp", sender: self)
+        }
+        else{
+            var alert=UIAlertController.init(title: "Wrong details", message: "Please Check your credentials", preferredStyle: .alert)
+            var ok=UIAlertAction.init(title: "OK", style: .default){
+                (ACTION)->Void in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        }
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPVC") as! OTPVC
-        vc.mob=mobile.text!
-        self.present(vc, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier=="login_to_otp"){
+            let vc = segue.destination as! OTPVC
+            vc.mob = mobile.text!
+        }
+        if(segue.identifier=="login_to_register"){
+            let vc = segue.destination as! register
+        }
     }
     
     @IBAction func register(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "register")
         email.resignFirstResponder()
         mobile.resignFirstResponder()
-        self.present(vc!, animated: true, completion: nil)
+        performSegue(withIdentifier: "login_to_register", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -53,8 +85,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIScrollViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         scrl.delegate=self
-        email.text="shreya@iitj.ac.in"
-        mobile.text="9875439875"
+        email.text="risha@gmail.com"
+        mobile.text="9327005120"
         email.delegate=self
         mobile.delegate=self
         self.view.isUserInteractionEnabled=true
