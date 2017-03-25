@@ -97,9 +97,35 @@ class mallsVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UISear
         getMalls()
     }
     func getMalls(){
-        mall = ["Inorbit","Dumas Road","23492347","imgurl1"]
-        all_malls.append(mall)
-        mall = ["Shopper's Stop","Kamrej","23742","imgurl2"]
-        all_malls.append(mall)
+        var db=DatabaseManager()
+        var flag=false
+        db.GeneratePostString(dict: ["City":city])
+        db.GetRequest(url: "http://onetouch.16mb.com/SkipQ/getmalls.php")
+        DispatchQueue.global(qos: .userInteractive).async {
+            flag=db.CreateTask(view: self.view)
+            
+        }
+        while(flag != true){
+            
+        }
+        var array=db.getjson()
+        if((array[array.count-1] as! [String:String])["flag"] == "0"){
+            var alert=UIAlertController.init(title: "OK", message: "OK", preferredStyle: .alert)
+            var OK=UIAlertAction.init(title: "OK", style: .default){
+                (ACTION)->Void in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(OK);
+            present(alert, animated: true, completion: nil)
+        }
+        else{
+            for var i in 0 ... array.count-2{
+                var arr=array[i] as! [String:String]
+                mall=[arr["MallName"]!,arr["Address"]!,arr["ContactNo"]!,arr["ImageURL"]!]
+                all_malls.append(mall)
+            }
+
+        }
+        
     }
 }

@@ -6,21 +6,21 @@ provides-nominal:
 provides-member:
 - ["C9SkipQueue15customCellMalls", ""]
 provides-dynamic-lookup:
-- "mall_name"
 - "mall_image_url"
 - "setSelected"
-- "mall_contact"
 - "mall_image"
-- "awakeFromNib"
+- "mall_contact"
 - "mall_add"
+- "awakeFromNib"
+- "mall_name"
 depends-top-level:
+- "UILabel"
+- "Bool"
+- "UITableViewCell"
 - "String"
 - "customCellMalls"
-- "UITableViewCell"
-- "UILabel"
-- "UIImageView"
-- "Bool"
 - "StringLiteralType"
+- "UIImageView"
 depends-member:
 - ["Ps9AnyObject", "awakeFromNib"]
 - ["Ps9AnyObject", "init"]

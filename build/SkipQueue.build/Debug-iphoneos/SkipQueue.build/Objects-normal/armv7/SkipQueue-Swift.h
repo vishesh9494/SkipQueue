@@ -205,6 +205,7 @@ SWIFT_CLASS("_TtC9SkipQueue15customCellMalls")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_name;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_add;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_contact;
+@property (nonatomic, copy) NSString * _Nonnull mall_image_url;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -249,9 +250,9 @@ SWIFT_CLASS("_TtC9SkipQueue7mallsVC")
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
 @property (nonatomic, weak) IBOutlet UISearchBar * _Null_unspecified search;
 @property (nonatomic, copy) NSString * _Nonnull city;
-@property (nonatomic, copy) NSArray * _Nonnull mall;
-@property (nonatomic, copy) NSArray * _Nonnull all_malls;
-@property (nonatomic, copy) NSArray * _Nonnull searchingDataArray;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull mall;
+@property (nonatomic, copy) NSArray<NSArray<NSString *> *> * _Nonnull all_malls;
+@property (nonatomic, copy) NSArray<NSArray<NSString *> *> * _Nonnull searchingDataArray;
 - (NSInteger)numberOfSectionsInTableView:(UITableView * _Nonnull)tableView;
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;

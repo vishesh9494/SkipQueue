@@ -117,6 +117,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
 @import ObjectiveC;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -136,33 +137,152 @@ SWIFT_CLASS("_TtC9SkipQueue11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSDictionary;
+@class NSArray;
+@class UIView;
 
 SWIFT_CLASS("_TtC9SkipQueue15DatabaseManager")
 @interface DatabaseManager : NSObject
+- (void)GetRequestWithUrl:(NSString * _Nonnull)url;
+- (void)GeneratePostStringWithDict:(NSDictionary * _Nonnull)dict;
+- (NSArray * _Nonnull)getjson;
+- (BOOL)CreateTaskWithView:(UIView * _Nonnull)view;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UITouch;
-@class UIEvent;
 @class UITextField;
-@class UIImageView;
 @class UIScrollView;
+@class UIStoryboardSegue;
+@class UIImageView;
+@class UILabel;
 @class NSBundle;
 @class NSCoder;
 
-SWIFT_CLASS("_TtC9SkipQueue14ViewController")
-@interface ViewController : UIViewController <UITextFieldDelegate>
+SWIFT_CLASS("_TtC9SkipQueue5OTPVC")
+@interface OTPVC : UIViewController <UITextFieldDelegate>
+@property (nonatomic, copy) NSString * _Nonnull mob;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
+@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified txt_OTP;
+@property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified otp_msg;
+- (void)viewDidLoad;
+- (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
+- (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
+- (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
+- (void)viewDidAppear:(BOOL)animated;
+- (IBAction)btn_submit:(id _Nonnull)sender;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
+- (IBAction)btn_resend:(id _Nonnull)sender;
+- (IBAction)btn_cancel:(id _Nonnull)sender;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9SkipQueue14ViewController")
+@interface ViewController : UIViewController <UIScrollViewDelegate, UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrl;
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified mobile;
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified email;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
+- (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
 - (IBAction)login:(id _Nonnull)sender;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
 - (IBAction)register:(id _Nonnull)sender;
-- (void)touchesBegan:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
 - (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
 - (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9SkipQueue15customCellMalls")
+@interface customCellMalls : UITableViewCell
+- (void)awakeFromNib;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified mall_image;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_name;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_add;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified mall_contact;
+@property (nonatomic, copy) NSString * _Nonnull mall_image_url;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSMutableArray;
+@class UITouch;
+@class UIEvent;
+@class UITableView;
+@class UISearchBar;
+
+SWIFT_CLASS("_TtC9SkipQueue10locationVC")
+@interface locationVC : UIViewController <UIBarPositioningDelegate, UITableViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
+@property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tbl;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull cities;
+@property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrl;
+@property (nonatomic) BOOL is_searching;
+@property (nonatomic, strong) NSMutableArray * _Null_unspecified searchingDataArray;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
+@property (nonatomic, weak) IBOutlet UISearchBar * _Null_unspecified search;
+@property (nonatomic, copy) NSString * _Nonnull city;
+- (void)viewDidLoad;
+- (void)getCities;
+- (void)touchesBegan:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (void)viewDidAppear:(BOOL)animated;
+- (NSInteger)numberOfSectionsInTableView:(UITableView * _Nonnull)tableView;
+- (void)viewWillAppear:(BOOL)animated;
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)searchBar:(UISearchBar * _Nonnull)searchBar textDidChange:(NSString * _Nonnull)searchText;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9SkipQueue7mallsVC")
+@interface mallsVC : UIViewController <UIBarPositioningDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIScrollViewDelegate, UITableViewDelegate>
+@property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrl;
+@property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tbl;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
+@property (nonatomic, weak) IBOutlet UISearchBar * _Null_unspecified search;
+@property (nonatomic, copy) NSString * _Nonnull city;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull mall;
+@property (nonatomic, copy) NSArray<NSArray<NSString *> *> * _Nonnull all_malls;
+@property (nonatomic, copy) NSArray<NSArray<NSString *> *> * _Nonnull searchingDataArray;
+- (NSInteger)numberOfSectionsInTableView:(UITableView * _Nonnull)tableView;
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)searchBar:(UISearchBar * _Nonnull)searchBar textDidChange:(NSString * _Nonnull)searchText;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)touchesBegan:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewDidLoad;
+- (void)getMalls;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9SkipQueue8register")
+@interface register : UIViewController <UITextFieldDelegate>
+@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified email;
+@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified mobile;
+@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified name;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified logo;
+@property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrl;
+- (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
+- (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
+- (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
+- (IBAction)submit:(id _Nonnull)sender;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
+- (IBAction)cancel:(id _Nonnull)sender;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end

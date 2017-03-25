@@ -24,7 +24,7 @@ class DatabaseManager : NSObject{
         var str:String=""
         let keys = dict.allKeys
         let values = dict.allValues
-        for var i in 0 ... dict.count-2{
+        for var i in 0 ... (dict.count-2>0 ? dict.count-2 : 0){
             str.append("\(keys[i])=\(values[i])&")
         }
         str.append("\(keys[dict.count-1])=\(values[dict.count-1])")

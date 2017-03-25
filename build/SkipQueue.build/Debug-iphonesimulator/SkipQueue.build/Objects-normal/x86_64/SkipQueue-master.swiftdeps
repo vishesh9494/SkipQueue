@@ -1,7 +1,12 @@
 version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
-options: "ca76006f274bb4dd3e321e3250412b2b"
-build_time: [543434015, 217534000]
+options: "cee28e1208889732d77a1e4349bcfdcc"
+build_time: [543752593, 352351000]
 inputs:
-  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/ViewController.swift": [543433985, 0]
-  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/AppDelegate.swift": [543431428, 0]
-  "/Users/vishesh/Desktop/SkipQueue/SkipQueue/DatabaseManager.swift": [543433469, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/OTPVC.swift": [543589064, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/locationVC.swift": [543601748, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/mallsVC.swift": [543748429, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/ViewController.swift": [543608663, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/customCellMalls.swift": [543695825, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/AppDelegate.swift": [543431428, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/register.swift": [543589048, 0]
+  "/Users/vishesh/Downloads/SkipQueue/SkipQueue/DatabaseManager.swift": [543748806, 0]
